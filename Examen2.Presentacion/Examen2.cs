@@ -13,6 +13,7 @@ namespace Examen2.Presentacion
         {
             InitializeComponent();
             Tabla();
+            tablaingrediente();
         }
         void Tabla()
         {
@@ -20,12 +21,15 @@ namespace Examen2.Presentacion
             table = operaciones.mostrarTodo();
             dg_menu.DataSource = table;
         }
-        void TablaIngrediente()
-        {
-            //DataTable table = new DataTable();
-            //table = operaciones.BuscarIngrediente();
-            //dg_menu.DataSource = table;
+
+        void tablaingrediente() {
+
+            DataTable table = new DataTable();
+            table = operaciones.mostrarTodo();
+            dataGridView1.DataSource = table;
+
         }
+        
         private void btn_eliminar_Click(object sender, EventArgs e)
         {
           //  Entidades.Menu menu = new Entidades.Menu();
@@ -36,12 +40,22 @@ namespace Examen2.Presentacion
 
         private void btn_agregar_ingrediente_Click(object sender, EventArgs e)
         {
+            //implementar
 
+            Ingredientes ingredientes = new Ingredientes();
+            ingredientes.NombreIngre = textBox2.Text;
+            ingredientes.DescripcionIngre = textBox1.Text;
+            operaciones.AgregarIngrediente(ingredientes);
+            tablaingrediente();
         }
 
         private void btn_eliminar_ingrediente_Click(object sender, EventArgs e)
         {
+            //eliminar
 
+            operaciones.EliminarMenu(int.Parse(textBox3.Text));
+            operaciones.EliminarIngrediente(int.Parse(textBox3.Text));
+            tablaingrediente();
         }
 
         private void btn_salvar_Click(object sender, EventArgs e)
@@ -74,11 +88,13 @@ namespace Examen2.Presentacion
 
             int rowindex = dg_menu.CurrentRow.Index;
             DataGridViewRow row = dg_menu.Rows[rowindex];
-            MessageBox.Show(row.Cells[0].Value.ToString() + " " + row.Cells[1].Value.ToString() +" " +row.Cells[2].Value.ToString() + " "+row.Cells[3].Value.ToString());
+            string h=row.Cells[0].Value.ToString(); 
+            int pru = int.Parse(h);
+            //MessageBox.Show(row.Cells[0].Value.ToString() + " " + row.Cells[1].Value.ToString() +" " +row.Cells[2].Value.ToString() + " "+row.Cells[3].Value.ToString());
 
 
 
-            //LABEL OCULTOO AHI ID  -> AGREGAR UN INGREDIENTE SACA EL VALOR DEL ID MENU, INGREDIENTE NOMNBRE, DESCRIPCION Y ID DEL MENU
+            //L  -> AGREGAR UN INGREDIENTE SACA EL VALOR DEL ID MENU, INGREDIENTE NOMNBRE, DESCRIPCION Y ID DEL MENU
             //sacar un select a ingredientes para poder validarlos los mismos
             // funcion llamar ingrediente
             //envio row.cell...
@@ -87,9 +103,9 @@ namespace Examen2.Presentacion
             //row.Cells["ColumnName"].Value
 
             //dg_menu.CurrentRow.Cells. CurrentRow.Cells["ColumnName"].Value
-            //DataTable table1 = new DataTable();
-            //table1 = operaciones.BuscarIngrediente(int.Parse(row12));
-            //dataGridView1.DataSource = table1;
+            DataTable table1 = new DataTable();
+            table1 = operaciones.BuscarIngrediente(int.Parse(h));
+            dataGridView1.DataSource = table1;
         }
 
         private void button1_Click(object sender, EventArgs e)

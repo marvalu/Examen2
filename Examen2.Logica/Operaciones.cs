@@ -16,6 +16,7 @@ namespace Examen2.Logica
 
 
         OperacionesMenu operacionesMenu = new OperacionesMenu();
+        OperacionesIngredientes OperacionesIngredientes = new OperacionesIngredientes();
 
         public void realizarPruebas(Menu menu)
         {
@@ -51,6 +52,32 @@ namespace Examen2.Logica
         #endregion
 
         #region Operaciones Ingredientes
+
+
+        public void AgregarIngrediente(Ingredientes ingredientes)
+        {
+
+            OperacionesIngredientes.Insertar(ingredientes);
+        }
+        public DataTable mostrarTodoIngrediente()
+        {
+
+            return OperacionesIngredientes.BuscarTodos();
+              
+        }
+
+
+        public void EliminarIngrediente(int ID)
+        {
+
+
+            OperacionesIngredientes.Elminiar(ID);
+
+
+        }
+
+
+
 
         #endregion
 
